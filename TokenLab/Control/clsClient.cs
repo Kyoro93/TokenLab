@@ -8,13 +8,13 @@ using TokenLab.Control;
 
 namespace TokenLab.Model
 {
-    public sealed class Client
+    public sealed class clsClient
     {
-        private static readonly Client instance = new Client();
+        private static readonly clsClient instance = new clsClient();
 
-        private Client() { }
+        private clsClient() { }
 
-        public static Client Instance
+        public static clsClient Instance
         {
             get
             {
@@ -22,20 +22,13 @@ namespace TokenLab.Model
             }
         }
 
-        private Int32 IntIdClient;
         private string StrUser;
 
         public void SetLoggedUser(string StrUser)
         {
-            DbConnection _conn = DbConnection.Instance;
+            clsDbConnection _conn = clsDbConnection.Instance;
 
             this.StrUser = StrUser;
-            this.IntIdClient = Convert.ToInt32(_conn.GetIdClient(StrUser));
-        }
-
-        public Int32 GetIdClient()
-        {
-            return IntIdClient;
         }
 
         public string GetUser()

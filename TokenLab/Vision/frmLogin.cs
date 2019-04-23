@@ -12,17 +12,17 @@ using TokenLab.Model;
 
 namespace TokenLab.Vision
 {
-    public partial class Login : Form
+    public partial class frmLogin : Form
     {
         private bool blLogado;
-        public Login()
+        public frmLogin()
         {
             InitializeComponent();
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            DbConnection _db = DbConnection.Instance;
+            clsDbConnection _db = clsDbConnection.Instance;
 
             bool result = _db.CheckLogin(txbUser.Text, txbPass.Text);
 
@@ -30,7 +30,7 @@ namespace TokenLab.Vision
 
             if(result){
                 MessageBox.Show("Seja bem vindo!");
-                Client _clt = Client.Instance;
+                clsClient _clt = clsClient.Instance;
                 _clt.SetLoggedUser(txbUser.Text);
                 this.Close();
             }else{
@@ -54,6 +54,20 @@ namespace TokenLab.Vision
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void BtnRegister_Click(object sender, EventArgs e)
+        {
+            frmNewUser objNewUser = new frmNewUser();
+            objNewUser.ShowDialog();
+        }
+
+        private void TxbUser_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BtnLogin_Click(this, new EventArgs());
+            }
         }
     }
 }
