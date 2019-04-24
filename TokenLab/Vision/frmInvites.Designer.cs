@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.dgvInvites = new System.Windows.Forms.DataGridView();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.txbIdEvent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbStartDatetime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbFinalDatetime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbOwnerLogin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbAccepted = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAccept = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.brnRemove = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvites)).BeginInit();
             this.SuspendLayout();
@@ -58,26 +58,6 @@
             this.dgvInvites.ReadOnly = true;
             this.dgvInvites.Size = new System.Drawing.Size(685, 144);
             this.dgvInvites.TabIndex = 1;
-            // 
-            // btnAccept
-            // 
-            this.btnAccept.Location = new System.Drawing.Point(703, 12);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(75, 23);
-            this.btnAccept.TabIndex = 2;
-            this.btnAccept.Text = "Aceitar";
-            this.btnAccept.UseVisualStyleBackColor = true;
-            this.btnAccept.Click += new System.EventHandler(this.BtnAccept_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(703, 104);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancelar";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // txbIdEvent
             // 
@@ -123,6 +103,26 @@
             this.txbAccepted.Name = "txbAccepted";
             this.txbAccepted.ReadOnly = true;
             // 
+            // btnAccept
+            // 
+            this.btnAccept.Location = new System.Drawing.Point(703, 12);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(75, 23);
+            this.btnAccept.TabIndex = 2;
+            this.btnAccept.Text = "Aceitar";
+            this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.BtnAccept_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(703, 104);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "Cancelar";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
             // brnRemove
             // 
             this.brnRemove.Location = new System.Drawing.Point(703, 41);
@@ -142,6 +142,9 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.dgvInvites);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmInvites";
             this.Text = "frmInvites";
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvites)).EndInit();

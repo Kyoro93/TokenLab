@@ -101,6 +101,9 @@
             this.Controls.Add(this.txbRepeatPass);
             this.Controls.Add(this.txbPass);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAlterPassword";
             this.Text = "Alterar senha";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmAlterPassword_FormClosed);

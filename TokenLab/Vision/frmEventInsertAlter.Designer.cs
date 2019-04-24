@@ -186,6 +186,9 @@
             this.Controls.Add(this.dtpFinalDate);
             this.Controls.Add(this.dtpStartDate);
             this.Controls.Add(this.rtbDescription);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmEventInsertAlter";
             this.Text = "Edição de evento";
             this.Load += new System.EventHandler(this.FrmEventInsertAlter_Load);

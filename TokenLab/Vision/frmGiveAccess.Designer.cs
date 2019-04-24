@@ -79,6 +79,9 @@
             this.Controls.Add(this.btnInvite);
             this.Controls.Add(this.txbAccessTo);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmGiveAccess";
             this.Text = "Convidar";
             this.ResumeLayout(false);

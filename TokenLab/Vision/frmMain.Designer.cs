@@ -190,7 +190,10 @@
             this.Controls.Add(this.btnNewEvent);
             this.Controls.Add(this.dgvEvent);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Main";
             this.Text = "Eventos";
             this.Load += new System.EventHandler(this.Main_Load);
