@@ -69,12 +69,59 @@ namespace TokenLab.Control
                     DataTable dt = new DataTable();
                     {
                         cn.Open();
-                        SqlDataAdapter sqlDa = new SqlDataAdapter("select * from Event where OwnerLogin = '" + strOwner + "';", cn);
+                        SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Event where OwnerLogin = '" + strOwner + "' UNION ALL SELECT * FROM Event WHERE IdEvent IN (SELECT IdEvent FROM Invitation WHERE AccessTo = '" + @strOwner + "' AND AcceptedAt IS NOT NULL );", cn);
                         sqlDa.Fill(dt);
                         cn.Close();
                         return dt;
                     }
                 } catch(Exception e)
+                {
+                    throw (e);
+                }
+            }
+        }
+
+        public DataTable GetEventsByInvitation(string strAccessTo)
+        {
+            using (SqlConnection cn = getConn())
+            {
+                try
+                {
+                    DataTable dt = new DataTable();
+                    {
+                        cn.Open();
+                        SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT Event.*, (SELECT CASE WHEN Inv.AcceptedAt IS NULL THEN 'pendente' ELSE 'aceito' END FROM Invitation Inv where Inv.IdEvent = Event.IdEvent AND Inv.AccessTo = '" + strAccessTo + "') AS InvitationStatus FROM Event where IdEvent IN (SELECT IdEvent FROM Invitation WHERE AccessTo = '" + strAccessTo + "');", cn);
+                        sqlDa.Fill(dt);
+                        cn.Close();
+                        return dt;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw (e);
+                }
+            }
+        }
+
+        public bool CheckInvitation(int intIdEvent, string strAccessTo)
+        {
+            using (SqlConnection cn = getConn())
+            {
+                try
+                {
+                    {
+                        DataTable dt = new DataTable();
+                        cn.Open();
+                        SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT 1 FROM Invitation WHERE IdEvent = " + intIdEvent + " AND AccessTo = '" + strAccessTo + "';", cn);
+                        sqlDa.Fill(dt);
+                        cn.Close();
+                        if (Convert.ToInt32(dt.Rows.Count) == 1)
+                            return true;
+                        else
+                            return false;
+                    }
+                }
+                catch (Exception e)
                 {
                     throw (e);
                 }
@@ -105,7 +152,7 @@ namespace TokenLab.Control
             }
         }
 
-        public bool DeleteEvent(Int32 intIdEvent, string strOwnerLogin)
+        public bool DeleteEvent(Int32 intIdEvent)
         {
             using (SqlConnection cn = getConn())
             {
@@ -115,7 +162,6 @@ namespace TokenLab.Control
                     SqlCommand sqlCmd = new SqlCommand("EventDeleteById", cn);
                     sqlCmd.CommandType = CommandType.StoredProcedure;
                     sqlCmd.Parameters.AddWithValue("@IdEvent", intIdEvent);
-                    sqlCmd.Parameters.AddWithValue("@AccessTo", strOwnerLogin);
                     sqlCmd.ExecuteNonQuery();
                     cn.Close();
                     return true;
@@ -127,14 +173,58 @@ namespace TokenLab.Control
             }
         }
 
-        public bool InsertOrAcceptInvitation(Int32 intIdEvent, string strAccessTo)
+        public bool InsertInvitation(Int32 intIdEvent, string strAccessTo)
         {
             using (SqlConnection cn = getConn())
             {
                 try
                 {
                     cn.Open();
-                    SqlCommand sqlCmd = new SqlCommand("InvitationAddOrUpdate", cn);
+                    SqlCommand sqlCmd = new SqlCommand("InvitationAdd", cn);
+                    sqlCmd.CommandType = CommandType.StoredProcedure;
+                    sqlCmd.Parameters.AddWithValue("@IdEvent", intIdEvent);
+                    sqlCmd.Parameters.AddWithValue("@AccessTo", strAccessTo);
+                    sqlCmd.ExecuteNonQuery();
+                    cn.Close();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    throw (e);
+                }
+            }
+        }
+
+        public bool DeleteInvitation(Int32 intIdEvent, string strAccessTo)
+        {
+            using (SqlConnection cn = getConn())
+            {
+                try
+                {
+                    cn.Open();
+                    SqlCommand sqlCmd = new SqlCommand("InvitationDeleteByIdEventAndAccessTo", cn);
+                    sqlCmd.CommandType = CommandType.StoredProcedure;
+                    sqlCmd.Parameters.AddWithValue("@IdEvent", intIdEvent);
+                    sqlCmd.Parameters.AddWithValue("@AccessTo", strAccessTo);
+                    sqlCmd.ExecuteNonQuery();
+                    cn.Close();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    throw (e);
+                }
+            }
+        }
+
+        public bool AcceptInvitation(Int32 intIdEvent, string strAccessTo)
+        {
+            using (SqlConnection cn = getConn())
+            {
+                try
+                {
+                    cn.Open();
+                    SqlCommand sqlCmd = new SqlCommand("InvitationAccept", cn);
                     sqlCmd.CommandType = CommandType.StoredProcedure;
                     sqlCmd.Parameters.AddWithValue("@IdEvent", intIdEvent);
                     sqlCmd.Parameters.AddWithValue("@AccessTo", strAccessTo);

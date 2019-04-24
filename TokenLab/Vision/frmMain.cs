@@ -19,7 +19,6 @@ namespace TokenLab
         public Main()
         {
             InitializeComponent();
-            // HideUnwantedDgvColumns();
         }
 
         private void HideUnwantedDgvColumns()
@@ -59,14 +58,14 @@ namespace TokenLab
                 MessageBox.Show("Por favor selecione apenas 1 evento");
                 return;
             }
+
             if(dgvEvent.SelectedRows.Count < 1)
             {
-                MessageBox.Show("Por favor selecione um evento");
+                MessageBox.Show("Por favor selecione pelo menos um evento");
                 return;
             }
 
             string strOwner = dgvEvent.SelectedRows[0].Cells[4].Value.ToString();
-
             if (!clsClient.Instance.GetUser().Equals(strOwner))
             {
                 MessageBox.Show("Você não pode alterar um evento que não é seu");
@@ -78,7 +77,9 @@ namespace TokenLab
             string strStartDatetime = dgvEvent.SelectedRows[0].Cells[2].Value.ToString();
             string strFinalDatetime = dgvEvent.SelectedRows[0].Cells[3].Value.ToString();
 
-            frmEventInsertAlter objEventInsertAlter = new frmEventInsertAlter(intIdEvent, strDescription, strStartDatetime, strFinalDatetime);
+            clsEvent ev = new clsEvent(intIdEvent, strDescription, strStartDatetime, strFinalDatetime, clsClient.Instance.GetUser());
+
+            frmEventInsertAlter objEventInsertAlter = new frmEventInsertAlter(ev);
             objEventInsertAlter.ShowDialog();
             PopulateDataGridView();
         }
@@ -98,19 +99,75 @@ namespace TokenLab
                 }
             }
 
-            if (MessageBox.Show("Deseja remover " + intQntRows + " evento(s)?", "Sim", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Deseja remover " + intQntRows + " evento(s)?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                clsDbConnection _db = clsDbConnection.Instance;
-
-                foreach (DataGridViewRow r in dgvEvent.SelectedRows)
+                try
                 {
-                    
-                    Int32 intIdEvent = Convert.ToInt32(r.Cells[0].Value);
-                    _db.DeleteEvent(intIdEvent, clsClient.Instance.GetUser());
-                }
+                    foreach (DataGridViewRow r in dgvEvent.SelectedRows)
+                    {
+                        Int32 intIdEvent = Convert.ToInt32(r.Cells[0].Value);
+                        string strDescription = dgvEvent.SelectedRows[0].Cells[1].Value.ToString();
+                        string strStartDatetime = dgvEvent.SelectedRows[0].Cells[2].Value.ToString();
+                        string strFinalDatetime = dgvEvent.SelectedRows[0].Cells[3].Value.ToString();
+                        clsEvent ev = new clsEvent(intIdEvent, strDescription, strStartDatetime, strFinalDatetime, clsClient.Instance.GetUser());
+                        ev.DeleteEventFromDb();
+                    }
 
-                PopulateDataGridView();
+                    PopulateDataGridView();
+                }catch(Exception ex)
+                {
+                    MessageBox.Show("Erro ao deletar evento: " + ex.Message);
+                }
             }
+        }
+
+        private void BtnInvite_Click(object sender, EventArgs e)
+        {
+            if (dgvEvent.SelectedRows.Count > 1)
+            {
+                MessageBox.Show("Por favor selecione apenas 1 evento");
+                return;
+            }
+
+            if (dgvEvent.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Por favor selecione pelo menos um evento");
+                return;
+            }
+            string strOwner = dgvEvent.CurrentRow.Cells[4].Value.ToString();
+
+            if (!clsClient.Instance.GetUser().Equals(strOwner))
+            {
+                MessageBox.Show("Você não pode convidar alguém para um evento que não é seu");
+                return;
+            }
+
+            Int32 intIdEvent = Convert.ToInt32(dgvEvent.CurrentRow.Cells[0].Value);
+            string strDescription = dgvEvent.SelectedRows[0].Cells[1].Value.ToString();
+            string strStartDatetime = dgvEvent.SelectedRows[0].Cells[2].Value.ToString();
+            string strFinalDatetime = dgvEvent.SelectedRows[0].Cells[3].Value.ToString();
+            clsEvent ev = new clsEvent(intIdEvent, strDescription, strStartDatetime, strFinalDatetime, clsClient.Instance.GetUser());
+            frmGiveAccess objGiveAccess = new frmGiveAccess(ev);
+            objGiveAccess.ShowDialog();
+        }
+
+        private void BtnInvited_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmInvites objInvites = new frmInvites();
+                objInvites.ShowDialog();
+                PopulateDataGridView();
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar convites: " + ex.Message);
+            }
+        }
+
+        private void SAIRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Você deseja sair do sistema?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                Application.Exit();
         }
     }
 }

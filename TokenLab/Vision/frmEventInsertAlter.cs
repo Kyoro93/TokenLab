@@ -21,16 +21,16 @@ namespace TokenLab.Vision
             InitializeComponent();
         }
 
-        public frmEventInsertAlter(Int32 intIdEvent, string strDescription, string strStartDatetime, string strFinalDatetime)
+        public frmEventInsertAlter(clsEvent ev)
         {
             InitializeComponent();
 
-            this.intIdEvent = intIdEvent;
-            rtbDescription.Text = strDescription;
-            dtpStartDate.Text = strStartDatetime.ToString();
-            dtpFinalDate.Text = strFinalDatetime.ToString();
-            mtbStartTime.Text = strStartDatetime.Substring(11,5);
-            mtbFinalTime.Text = strFinalDatetime.Substring(11,5);
+            this.intIdEvent = ev.IntIdEvent;
+            rtbDescription.Text = ev.StrDescription;
+            dtpStartDate.Text = ev.StrStartDatetime.ToString();
+            dtpFinalDate.Text = ev.StrFinalDatetime.ToString();
+            mtbStartTime.Text = ev.StrStartDatetime.Substring(11,5);
+            mtbFinalTime.Text = ev.StrFinalDatetime.Substring(11,5);
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
@@ -64,15 +64,18 @@ namespace TokenLab.Vision
                     MessageBox.Show("Já existem eventos cadastrados pra esse período, por favor selecione outro");
                     return;
                 }
+                string strDescription = rtbDescription.Text;
 
-                _db.InsertOrUpdateEvent(intIdEvent, rtbDescription.Text, strStartDatetime, strFinalDatetime);
+                clsEvent ev = new clsEvent(intIdEvent, strDescription, strStartDatetime, strFinalDatetime, clsClient.Instance.GetUser());
+                ev.CreateOrUpdateEventOnDb();
+                
                 this.Close();
             }catch(FormatException fEx)
             {
                 MessageBox.Show("Data incorreta, por favor corrija e tente novamente");
             }catch(Exception ex)
             {
-                throw (ex);
+                MessageBox.Show("Erro ao gerenciar evento: " + ex.Message);
             }
         }
 
