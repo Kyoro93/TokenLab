@@ -79,9 +79,25 @@ namespace TokenLab.Vision
             }
         }
 
-        private void FrmEventInsertAlter_Load(object sender, EventArgs e)
+        private void ControlDates(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (Convert.ToDateTime(dtpStartDate.Value) > Convert.ToDateTime(dtpFinalDate.Value))
+                {
+                    dtpFinalDate.Text = dtpStartDate.Text;
+                    return;
+                }
+                if (Convert.ToDateTime(dtpFinalDate.Value) < Convert.ToDateTime(dtpStartDate.Value))
+                {
+                    dtpStartDate.Text = dtpFinalDate.Text;
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

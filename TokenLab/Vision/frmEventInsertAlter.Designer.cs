@@ -58,6 +58,7 @@
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(223, 20);
             this.dtpStartDate.TabIndex = 1;
+            this.dtpStartDate.ValueChanged += new System.EventHandler(this.ControlDates);
             // 
             // dtpFinalDate
             // 
@@ -65,6 +66,7 @@
             this.dtpFinalDate.Name = "dtpFinalDate";
             this.dtpFinalDate.Size = new System.Drawing.Size(223, 20);
             this.dtpFinalDate.TabIndex = 2;
+            this.dtpFinalDate.ValueChanged += new System.EventHandler(this.ControlDates);
             // 
             // label1
             // 
@@ -191,7 +193,6 @@
             this.MinimizeBox = false;
             this.Name = "frmEventInsertAlter";
             this.Text = "Edição de evento";
-            this.Load += new System.EventHandler(this.FrmEventInsertAlter_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
