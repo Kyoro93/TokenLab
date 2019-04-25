@@ -67,6 +67,7 @@
             // 
             this.txbPass.Location = new System.Drawing.Point(64, 29);
             this.txbPass.Name = "txbPass";
+            this.txbPass.PasswordChar = '*';
             this.txbPass.Size = new System.Drawing.Size(199, 20);
             this.txbPass.TabIndex = 2;
             this.txbPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxbUser_KeyDown);
