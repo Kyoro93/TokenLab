@@ -80,7 +80,7 @@ namespace TokenLab.Control
             }
         }
 
-        public void DeleteInvite(string strAccessTo)
+        public void DeleteInvitation(string strAccessTo)
         {
             try
             {

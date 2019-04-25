@@ -63,17 +63,23 @@
     <Compile Include="Vision\frmEventInsertAlter.Designer.cs">
       <DependentUpon>frmEventInsertAlter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vision\frmGiveAccess.cs">
+    <Compile Include="Vision\frmMakeInvitation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vision\frmGiveAccess.Designer.cs">
-      <DependentUpon>frmGiveAccess.cs</DependentUpon>
+    <Compile Include="Vision\frmMakeInvitation.Designer.cs">
+      <DependentUpon>frmMakeInvitation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vision\frmInvites.cs">
+    <Compile Include="Vision\frmInvitesReceived.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vision\frmInvites.Designer.cs">
-      <DependentUpon>frmInvites.cs</DependentUpon>
+    <Compile Include="Vision\frmInvitesReceived.Designer.cs">
+      <DependentUpon>frmInvitesReceived.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vision\frmInvitesSent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vision\frmInvitesSent.Designer.cs">
+      <DependentUpon>frmInvitesSent.cs</DependentUpon>
     </Compile>
     <Compile Include="Vision\frmLogin.cs">
       <SubType>Form</SubType>
@@ -111,11 +117,14 @@
     <EmbeddedResource Include="Vision\frmEventInsertAlter.resx">
       <DependentUpon>frmEventInsertAlter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vision\frmGiveAccess.resx">
-      <DependentUpon>frmGiveAccess.cs</DependentUpon>
+    <EmbeddedResource Include="Vision\frmMakeInvitation.resx">
+      <DependentUpon>frmMakeInvitation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vision\frmInvites.resx">
-      <DependentUpon>frmInvites.cs</DependentUpon>
+    <EmbeddedResource Include="Vision\frmInvitesReceived.resx">
+      <DependentUpon>frmInvitesReceived.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vision\frmInvitesSent.resx">
+      <DependentUpon>frmInvitesSent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vision\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

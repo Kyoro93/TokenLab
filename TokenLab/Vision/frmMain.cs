@@ -147,7 +147,7 @@ namespace TokenLab
             string strStartDatetime = dgvEvent.SelectedRows[0].Cells[2].Value.ToString();
             string strFinalDatetime = dgvEvent.SelectedRows[0].Cells[3].Value.ToString();
             clsEvent ev = new clsEvent(intIdEvent, strDescription, strStartDatetime, strFinalDatetime, clsClient.Instance.GetUser());
-            frmGiveAccess objGiveAccess = new frmGiveAccess(ev);
+            frmMakeInvitation objGiveAccess = new frmMakeInvitation(ev);
             objGiveAccess.ShowDialog();
         }
 
@@ -155,7 +155,7 @@ namespace TokenLab
         {
             try
             {
-                frmInvites objInvites = new frmInvites();
+                frmInvitesReceived objInvites = new frmInvitesReceived();
                 objInvites.ShowDialog();
                 PopulateDataGridView();
             }catch(Exception ex)
@@ -168,6 +168,20 @@ namespace TokenLab
         {
             if (MessageBox.Show("Você deseja sair do sistema?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 Application.Exit();
+        }
+
+        private void BtnEnviados_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmInvitesSent objInvitesSent = new frmInvitesSent();
+                objInvitesSent.ShowDialog();
+                PopulateDataGridView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar convites: " + ex.Message);
+            }
         }
     }
 }

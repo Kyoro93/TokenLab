@@ -1,6 +1,6 @@
 ﻿namespace TokenLab.Vision
 {
-    partial class frmInvites
+    partial class frmInvitesSent
     {
         /// <summary>
         /// Required designer variable.
@@ -28,36 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvInvites = new System.Windows.Forms.DataGridView();
+            this.brnRemove = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.dgvInvitesSent = new System.Windows.Forms.DataGridView();
+            this.txbConvidado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txbAccepted = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbIdEvent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbStartDatetime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbFinalDatetime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbOwnerLogin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txbAccepted = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.brnRemove = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInvites)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInvitesSent)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvInvites
+            // brnRemove
             // 
-            this.dgvInvites.AllowUserToAddRows = false;
-            this.dgvInvites.AllowUserToDeleteRows = false;
-            this.dgvInvites.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvInvites.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.brnRemove.Location = new System.Drawing.Point(703, 39);
+            this.brnRemove.Name = "brnRemove";
+            this.brnRemove.Size = new System.Drawing.Size(75, 23);
+            this.brnRemove.TabIndex = 8;
+            this.brnRemove.Text = "Remover";
+            this.brnRemove.UseVisualStyleBackColor = true;
+            this.brnRemove.Click += new System.EventHandler(this.BrnRemove_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(703, 95);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 7;
+            this.btnCancel.Text = "Voltar";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
+            // 
+            // dgvInvitesSent
+            // 
+            this.dgvInvitesSent.AllowUserToAddRows = false;
+            this.dgvInvitesSent.AllowUserToDeleteRows = false;
+            this.dgvInvitesSent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvInvitesSent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.txbConvidado,
+            this.txbAccepted,
             this.txbIdEvent,
             this.txbStartDatetime,
             this.txbFinalDatetime,
             this.txbOwnerLogin,
-            this.txbDescription,
-            this.txbAccepted});
-            this.dgvInvites.Location = new System.Drawing.Point(12, 12);
-            this.dgvInvites.Name = "dgvInvites";
-            this.dgvInvites.ReadOnly = true;
-            this.dgvInvites.Size = new System.Drawing.Size(685, 144);
-            this.dgvInvites.TabIndex = 1;
+            this.txbDescription});
+            this.dgvInvitesSent.Location = new System.Drawing.Point(12, 12);
+            this.dgvInvitesSent.Name = "dgvInvitesSent";
+            this.dgvInvitesSent.ReadOnly = true;
+            this.dgvInvitesSent.Size = new System.Drawing.Size(685, 144);
+            this.dgvInvitesSent.TabIndex = 5;
+            // 
+            // txbConvidado
+            // 
+            this.txbConvidado.DataPropertyName = "AccessTo";
+            this.txbConvidado.HeaderText = "Convidado";
+            this.txbConvidado.Name = "txbConvidado";
+            this.txbConvidado.ReadOnly = true;
+            // 
+            // txbAccepted
+            // 
+            this.txbAccepted.DataPropertyName = "InvitationStatus";
+            this.txbAccepted.HeaderText = "Status";
+            this.txbAccepted.Name = "txbAccepted";
+            this.txbAccepted.ReadOnly = true;
             // 
             // txbIdEvent
             // 
@@ -87,6 +122,7 @@
             this.txbOwnerLogin.HeaderText = "Convidado por";
             this.txbOwnerLogin.Name = "txbOwnerLogin";
             this.txbOwnerLogin.ReadOnly = true;
+            this.txbOwnerLogin.Visible = false;
             // 
             // txbDescription
             // 
@@ -96,73 +132,35 @@
             this.txbDescription.Name = "txbDescription";
             this.txbDescription.ReadOnly = true;
             // 
-            // txbAccepted
-            // 
-            this.txbAccepted.DataPropertyName = "InvitationStatus";
-            this.txbAccepted.HeaderText = "Status";
-            this.txbAccepted.Name = "txbAccepted";
-            this.txbAccepted.ReadOnly = true;
-            // 
-            // btnAccept
-            // 
-            this.btnAccept.Location = new System.Drawing.Point(703, 12);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(75, 23);
-            this.btnAccept.TabIndex = 2;
-            this.btnAccept.Text = "Aceitar";
-            this.btnAccept.UseVisualStyleBackColor = true;
-            this.btnAccept.Click += new System.EventHandler(this.BtnAccept_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(703, 104);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancelar";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
-            // 
-            // brnRemove
-            // 
-            this.brnRemove.Location = new System.Drawing.Point(703, 41);
-            this.brnRemove.Name = "brnRemove";
-            this.brnRemove.Size = new System.Drawing.Size(75, 23);
-            this.brnRemove.TabIndex = 4;
-            this.brnRemove.Text = "Remover";
-            this.brnRemove.UseVisualStyleBackColor = true;
-            this.brnRemove.Click += new System.EventHandler(this.BrnRemove_Click);
-            // 
-            // frmInvites
+            // frmInvitesSent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 169);
+            this.ClientSize = new System.Drawing.Size(800, 166);
             this.Controls.Add(this.brnRemove);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnAccept);
-            this.Controls.Add(this.dgvInvites);
+            this.Controls.Add(this.dgvInvitesSent);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmInvites";
-            this.Text = "frmInvites";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInvites)).EndInit();
+            this.Name = "frmInvitesSent";
+            this.Text = "Convites Enviados";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvInvitesSent)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvInvites;
-        private System.Windows.Forms.Button btnAccept;
+        private System.Windows.Forms.Button brnRemove;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.DataGridView dgvInvitesSent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txbConvidado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txbAccepted;
         private System.Windows.Forms.DataGridViewTextBoxColumn txbIdEvent;
         private System.Windows.Forms.DataGridViewTextBoxColumn txbStartDatetime;
         private System.Windows.Forms.DataGridViewTextBoxColumn txbFinalDatetime;
         private System.Windows.Forms.DataGridViewTextBoxColumn txbOwnerLogin;
         private System.Windows.Forms.DataGridViewTextBoxColumn txbDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txbAccepted;
-        private System.Windows.Forms.Button brnRemove;
     }
 }

@@ -12,9 +12,9 @@ using TokenLab.Model;
 
 namespace TokenLab.Vision
 {
-    public partial class frmInvites: Form
+    public partial class frmInvitesReceived: Form
     {
-        public frmInvites()
+        public frmInvitesReceived()
         {
             InitializeComponent();
             PopulateDataGridView();
@@ -23,30 +23,30 @@ namespace TokenLab.Vision
         void PopulateDataGridView()
         {
             clsDbConnection _db = clsDbConnection.Instance;
-            dgvInvites.DataSource = clsDbConnection.Instance.GetEventsByInvitation(clsClient.Instance.GetUser());
+            dgvInvitesReceived.DataSource = clsDbConnection.Instance.GetEventsByInvitationReceived(clsClient.Instance.GetUser());
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)
         {
             try
             {
-                if (dgvInvites.SelectedRows.Count < 1)
+                if (dgvInvitesReceived.SelectedRows.Count < 1)
                 {
                     MessageBox.Show("Por favor selecione pelo menos um evento");
                     return;
                 }
 
-                if (dgvInvites.CurrentRow.Cells[4].Value.ToString().Equals("aceito"))
+                if (dgvInvitesReceived.CurrentRow.Cells[4].Value.ToString().Equals("aceito"))
                 {
                     MessageBox.Show("Você já aceitou o convite deste evento");
                     return;
 
                 }
 
-                Int32 intQntRows = dgvInvites.SelectedRows.Count;
+                Int32 intQntRows = dgvInvitesReceived.SelectedRows.Count;
                 if (MessageBox.Show("Deseja aceitar " + intQntRows + " evento(s)?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    foreach (DataGridViewRow r in dgvInvites.SelectedRows)
+                    foreach (DataGridViewRow r in dgvInvitesReceived.SelectedRows)
                     {
                         Int32 intIdEvent = Convert.ToInt32(r.Cells[0].Value);
                         string strDescription = r.Cells[1].Value.ToString();
@@ -56,11 +56,12 @@ namespace TokenLab.Vision
 
                         ev.AcceptInvite(clsClient.Instance.GetUser());
                     }
+                    MessageBox.Show("Convite(s) aceito(s) com sucesso.");
                 }
                 PopulateDataGridView();
             }catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Erro ao aceitar convite: " + ex.Message);
             }
         }
 
@@ -73,23 +74,23 @@ namespace TokenLab.Vision
         {
             try
             {
-                if (dgvInvites.SelectedRows.Count < 1)
+                if (dgvInvitesReceived.SelectedRows.Count < 1)
                 {
                     MessageBox.Show("Por favor selecione pelo menos um evento");
                     return;
                 }
 
-                if (dgvInvites.CurrentRow.Cells[4].Value.ToString().Equals("pendente"))
+                if (dgvInvitesReceived.CurrentRow.Cells[4].Value.ToString().Equals("pendente"))
                 {
                     MessageBox.Show("Você já aceitou o convite deste evento");
                     return;
 
                 }
 
-                Int32 intQntRows = dgvInvites.SelectedRows.Count;
+                Int32 intQntRows = dgvInvitesReceived.SelectedRows.Count;
                 if (MessageBox.Show("Deseja remover o convite de " + intQntRows + " evento(s)?", "Aviso", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    foreach (DataGridViewRow r in dgvInvites.SelectedRows)
+                    foreach (DataGridViewRow r in dgvInvitesReceived.SelectedRows)
                     {
                         Int32 intIdEvent = Convert.ToInt32(r.Cells[0].Value);
                         string strDescription = r.Cells[1].Value.ToString();
@@ -97,7 +98,7 @@ namespace TokenLab.Vision
                         string strFinalDatetime = r.Cells[3].Value.ToString();
                         clsEvent ev = new clsEvent(intIdEvent, strDescription, strStartDatetime, strFinalDatetime, clsClient.Instance.GetUser());
 
-                        ev.DeleteInvite(clsClient.Instance.GetUser());
+                        ev.DeleteInvitation(clsClient.Instance.GetUser());
                     }
                 }
                 PopulateDataGridView();

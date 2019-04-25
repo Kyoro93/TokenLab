@@ -33,6 +33,8 @@ namespace TokenLab.Control
             return new SqlConnection(builder.ConnectionString);
         }
 
+        
+
         public bool CheckLogin(string strUser, string strPass)
         {
             bool result = false;
@@ -81,7 +83,7 @@ namespace TokenLab.Control
             }
         }
 
-        public DataTable GetEventsByInvitation(string strAccessTo)
+        public DataTable GetEventsByInvitationReceived(string strAccessTo)
         {
             using (SqlConnection cn = getConn())
             {
@@ -91,6 +93,28 @@ namespace TokenLab.Control
                     {
                         cn.Open();
                         SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT Event.*, (SELECT CASE WHEN Inv.AcceptedAt IS NULL THEN 'pendente' ELSE 'aceito' END FROM Invitation Inv where Inv.IdEvent = Event.IdEvent AND Inv.AccessTo = '" + strAccessTo + "') AS InvitationStatus FROM Event where IdEvent IN (SELECT IdEvent FROM Invitation WHERE AccessTo = '" + strAccessTo + "');", cn);
+                        sqlDa.Fill(dt);
+                        cn.Close();
+                        return dt;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw (e);
+                }
+            }
+        }
+
+        internal object GetEventsByInvitationSent(string strOwnerLogin)
+        {
+            using (SqlConnection cn = getConn())
+            {
+                try
+                {
+                    DataTable dt = new DataTable();
+                    {
+                        cn.Open();
+                        SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT Event.*, Invitation.AccessTo, (SELECT CASE WHEN Inv.AcceptedAt IS NULL THEN 'pendente' ELSE 'aceito' END FROM Invitation Inv where Inv.IdEvent = Event.IdEvent AND Inv.AccessTo = Invitation.AccessTo) AS InvitationStatus FROM Event INNER JOIN Invitation ON Event.IdEvent = Invitation.IdEvent WHERE Event.OwnerLogin = '" + strOwnerLogin + "';", cn);
                         sqlDa.Fill(dt);
                         cn.Close();
                         return dt;
@@ -113,6 +137,31 @@ namespace TokenLab.Control
                         DataTable dt = new DataTable();
                         cn.Open();
                         SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT 1 FROM Invitation WHERE IdEvent = " + intIdEvent + " AND AccessTo = '" + strAccessTo + "';", cn);
+                        sqlDa.Fill(dt);
+                        cn.Close();
+                        if (Convert.ToInt32(dt.Rows.Count) == 1)
+                            return true;
+                        else
+                            return false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw (e);
+                }
+            }
+        }
+
+        public bool UserExist(string strUserLogin)
+        {
+            using (SqlConnection cn = getConn())
+            {
+                try
+                {
+                    {
+                        DataTable dt = new DataTable();
+                        cn.Open();
+                        SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT 1 FROM Client WHERE login = '" + strUserLogin + "';", cn);
                         sqlDa.Fill(dt);
                         cn.Close();
                         if (Convert.ToInt32(dt.Rows.Count) == 1)

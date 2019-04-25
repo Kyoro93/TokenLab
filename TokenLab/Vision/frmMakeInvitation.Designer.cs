@@ -1,6 +1,6 @@
 ﻿namespace TokenLab.Vision
 {
-    partial class frmGiveAccess
+    partial class frmMakeInvitation
     {
         /// <summary>
         /// Required designer variable.

@@ -12,10 +12,10 @@ using TokenLab.Model;
 
 namespace TokenLab.Vision
 {
-    public partial class frmGiveAccess : Form
+    public partial class frmMakeInvitation : Form
     {
         private clsEvent ev;
-        public frmGiveAccess(clsEvent ev)
+        public frmMakeInvitation(clsEvent ev)
         {
             InitializeComponent();
             this.ev = ev;
@@ -30,20 +30,21 @@ namespace TokenLab.Vision
         {
             try
             {
-                if (txbAccessTo.Text.Equals(""))
+                if (txbAccessTo.Text.Equals("") || !clsClient.Instance.UserExist(txbAccessTo.Text))
                 {
-                    MessageBox.Show("Usuario invalido");
+                    MessageBox.Show("Verifique o nome do usuário e tente novamente.");
                     return;
                 }
                 if (txbAccessTo.Text.Equals(clsClient.Instance.GetUser()))
                 {
-                    MessageBox.Show("Você já é o dono desse evento");
+                    MessageBox.Show("Você já é o dono desse evento.");
                     return;
                 }
                 if (ev.CheckInvite(txbAccessTo.Text)){
-                    MessageBox.Show("Este usuário já tem um convite para este evento");
+                    MessageBox.Show("Este usuário já possui um convite para este evento.");
                     return;
                 }
+
 
                 ev.InviteToEvent(txbAccessTo.Text);
 

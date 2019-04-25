@@ -35,5 +35,18 @@ namespace TokenLab.Model
         {
             return StrUser;
         }
+
+        public bool UserExist(string strUserLogin)
+        {
+            try
+            {
+                clsDbConnection _db = clsDbConnection.Instance;
+                return _db.UserExist(strUserLogin);
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
     }
 }
