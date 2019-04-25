@@ -85,12 +85,8 @@ namespace TokenLab.Vision
             {
                 if (Convert.ToDateTime(dtpStartDate.Value) > Convert.ToDateTime(dtpFinalDate.Value))
                 {
-                    dtpFinalDate.Text = dtpStartDate.Text;
-                    return;
-                }
-                if (Convert.ToDateTime(dtpFinalDate.Value) < Convert.ToDateTime(dtpStartDate.Value))
-                {
-                    dtpStartDate.Text = dtpFinalDate.Text;
+                    if(!(dtpStartDate.Text.Equals("") || dtpFinalDate.Text.Equals("")))
+                        dtpFinalDate.Text = dtpStartDate.Text;
                     return;
                 }
             }

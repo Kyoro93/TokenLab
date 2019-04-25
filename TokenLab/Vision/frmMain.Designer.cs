@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvEvent = new System.Windows.Forms.DataGridView();
             this.txbIdEvent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbStartDatetime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,8 +47,15 @@
             this.pnlEvent = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnEnviados = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEvent)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.pnlEvent.SuspendLayout();
@@ -81,6 +90,9 @@
             // txbStartDatetime
             // 
             this.txbStartDatetime.DataPropertyName = "StartDatetime";
+            dataGridViewCellStyle3.Format = "g";
+            dataGridViewCellStyle3.NullValue = null;
+            this.txbStartDatetime.DefaultCellStyle = dataGridViewCellStyle3;
             this.txbStartDatetime.HeaderText = "Data Inicial";
             this.txbStartDatetime.Name = "txbStartDatetime";
             this.txbStartDatetime.ReadOnly = true;
@@ -88,6 +100,9 @@
             // txbFinalDatetime
             // 
             this.txbFinalDatetime.DataPropertyName = "FinalDatetime";
+            dataGridViewCellStyle4.Format = "g";
+            dataGridViewCellStyle4.NullValue = null;
+            this.txbFinalDatetime.DefaultCellStyle = dataGridViewCellStyle4;
             this.txbFinalDatetime.HeaderText = "Data Final";
             this.txbFinalDatetime.Name = "txbFinalDatetime";
             this.txbFinalDatetime.ReadOnly = true;
@@ -148,7 +163,7 @@
             // 
             // btnChangePass
             // 
-            this.btnChangePass.Location = new System.Drawing.Point(713, 307);
+            this.btnChangePass.Location = new System.Drawing.Point(709, 290);
             this.btnChangePass.Name = "btnChangePass";
             this.btnChangePass.Size = new System.Drawing.Size(75, 34);
             this.btnChangePass.TabIndex = 4;
@@ -228,15 +243,6 @@
             this.panel1.Size = new System.Drawing.Size(83, 91);
             this.panel1.TabIndex = 10;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(704, 154);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Convites";
-            // 
             // btnEnviados
             // 
             this.btnEnviados.Location = new System.Drawing.Point(3, 61);
@@ -247,11 +253,93 @@
             this.btnEnviados.UseVisualStyleBackColor = true;
             this.btnEnviados.Click += new System.EventHandler(this.BtnEnviados_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(704, 154);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Convites";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.ForeColor = System.Drawing.Color.Tomato;
+            this.panel2.Location = new System.Drawing.Point(705, 374);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(15, 15);
+            this.panel2.TabIndex = 12;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Tomato;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.ForeColor = System.Drawing.Color.Tomato;
+            this.panel3.Location = new System.Drawing.Point(705, 395);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(15, 15);
+            this.panel3.TabIndex = 13;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.LightCyan;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.ForeColor = System.Drawing.Color.Tomato;
+            this.panel4.Location = new System.Drawing.Point(705, 416);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(15, 15);
+            this.panel4.TabIndex = 14;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(726, 374);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(22, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "OK";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(726, 395);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 13);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Finalizado";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(727, 416);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Aceito";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(715, 349);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(49, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Legenda";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnChangePass);
@@ -259,7 +347,6 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlEvent);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -284,11 +371,6 @@
         private System.Windows.Forms.Button btnDelEvent;
         private System.Windows.Forms.Button btnChangePass;
         private System.Windows.Forms.Button btnInvited;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txbIdEvent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txbStartDatetime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txbFinalDatetime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txbOwnerLogin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn txbDescription;
         private System.Windows.Forms.Button btnInvite;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem sAIRToolStripMenuItem;
@@ -297,6 +379,18 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnEnviados;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txbIdEvent;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txbStartDatetime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txbFinalDatetime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txbOwnerLogin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn txbDescription;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
 

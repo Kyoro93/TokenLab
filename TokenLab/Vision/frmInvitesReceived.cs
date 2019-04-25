@@ -36,7 +36,7 @@ namespace TokenLab.Vision
                     return;
                 }
 
-                if (dgvInvitesReceived.CurrentRow.Cells[4].Value.ToString().Equals("aceito"))
+                if (dgvInvitesReceived.CurrentRow.Cells[5].Value.ToString().Equals("aceito"))
                 {
                     MessageBox.Show("Você já aceitou o convite deste evento");
                     return;

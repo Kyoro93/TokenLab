@@ -36,7 +36,32 @@ namespace TokenLab
 
         void PopulateDataGridView()
         {
-            dgvEvent.DataSource = clsDbConnection.Instance.GetEventsByOwner(clsClient.Instance.GetUser());
+            try
+            {
+                dgvEvent.DataSource = clsDbConnection.Instance.GetEventsByOwner(clsClient.Instance.GetUser());
+
+                foreach (DataGridViewRow r in dgvEvent.Rows)
+                {
+                    string strOwner = r.Cells[4].Value.ToString();
+                    string strStartDatetime = r.Cells[2].Value.ToString();
+                    string strFinalDatetime = r.Cells[3].Value.ToString();
+
+                    if (strOwner.Equals(clsClient.Instance.GetUser()))
+                    {
+                        if (Convert.ToDateTime(strStartDatetime) < DateTime.Now)
+                            r.DefaultCellStyle.BackColor = Color.Tomato;
+                    }
+                    else
+                    {
+                        r.DefaultCellStyle.BackColor = Color.LightCyan;
+                    }
+                }
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar eventos: " + ex.Message);
+            }
         }
 
         private void BtnChangePass_Click(object sender, EventArgs e)
@@ -68,14 +93,26 @@ namespace TokenLab
             string strOwner = dgvEvent.SelectedRows[0].Cells[4].Value.ToString();
             if (!clsClient.Instance.GetUser().Equals(strOwner))
             {
-                MessageBox.Show("Você não pode alterar um evento que não é seu");
+                MessageBox.Show("Você não pode alterar um evento que não é seu.");
+                return;
+            }
+
+            string strFinalDatetime = dgvEvent.SelectedRows[0].Cells[3].Value.ToString();
+            if (Convert.ToDateTime(strFinalDatetime) < DateTime.Now)
+            {
+                MessageBox.Show("Você não pode alterar um evento que já terminou.");
+                return;
+            }
+
+            string strStartDatetime = dgvEvent.SelectedRows[0].Cells[2].Value.ToString();
+            if (Convert.ToDateTime(strStartDatetime) < DateTime.Now)
+            {
+                MessageBox.Show("Você não pode alterar um evento que já começou.");
                 return;
             }
 
             Int32 intIdEvent = Convert.ToInt32(dgvEvent.SelectedRows[0].Cells[0].Value);
             string strDescription = dgvEvent.SelectedRows[0].Cells[1].Value.ToString();
-            string strStartDatetime = dgvEvent.SelectedRows[0].Cells[2].Value.ToString();
-            string strFinalDatetime = dgvEvent.SelectedRows[0].Cells[3].Value.ToString();
 
             clsEvent ev = new clsEvent(intIdEvent, strDescription, strStartDatetime, strFinalDatetime, clsClient.Instance.GetUser());
 
@@ -142,10 +179,22 @@ namespace TokenLab
                 return;
             }
 
+            string strFinalDatetime = dgvEvent.SelectedRows[0].Cells[3].Value.ToString();
+            if (Convert.ToDateTime(strFinalDatetime) < DateTime.Now)
+            {
+                MessageBox.Show("Você não pode alterar um evento que já terminou.");
+                return;
+            }
+
+            string strStartDatetime = dgvEvent.SelectedRows[0].Cells[2].Value.ToString();
+            if (Convert.ToDateTime(strStartDatetime) < DateTime.Now)
+            {
+                MessageBox.Show("Você não pode alterar um evento que já começou.");
+                return;
+            }
+
             Int32 intIdEvent = Convert.ToInt32(dgvEvent.CurrentRow.Cells[0].Value);
             string strDescription = dgvEvent.SelectedRows[0].Cells[1].Value.ToString();
-            string strStartDatetime = dgvEvent.SelectedRows[0].Cells[2].Value.ToString();
-            string strFinalDatetime = dgvEvent.SelectedRows[0].Cells[3].Value.ToString();
             clsEvent ev = new clsEvent(intIdEvent, strDescription, strStartDatetime, strFinalDatetime, clsClient.Instance.GetUser());
             frmMakeInvitation objGiveAccess = new frmMakeInvitation(ev);
             objGiveAccess.ShowDialog();

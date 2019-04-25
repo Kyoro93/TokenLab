@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using TokenLab.Model;
 
 namespace TokenLab.Control
@@ -71,7 +66,7 @@ namespace TokenLab.Control
                     DataTable dt = new DataTable();
                     {
                         cn.Open();
-                        SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Event where OwnerLogin = '" + strOwner + "' UNION ALL SELECT * FROM Event WHERE IdEvent IN (SELECT IdEvent FROM Invitation WHERE AccessTo = '" + @strOwner + "' AND AcceptedAt IS NOT NULL );", cn);
+                        SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Event where OwnerLogin = '" + strOwner + "' UNION ALL SELECT * FROM Event WHERE IdEvent IN (SELECT IdEvent FROM Invitation WHERE AccessTo = '" + @strOwner + "' AND AcceptedAt IS NOT NULL ) ORDER BY Event.StartDatetime ASC;", cn);
                         sqlDa.Fill(dt);
                         cn.Close();
                         return dt;
@@ -92,7 +87,7 @@ namespace TokenLab.Control
                     DataTable dt = new DataTable();
                     {
                         cn.Open();
-                        SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT Event.*, (SELECT CASE WHEN Inv.AcceptedAt IS NULL THEN 'pendente' ELSE 'aceito' END FROM Invitation Inv where Inv.IdEvent = Event.IdEvent AND Inv.AccessTo = '" + strAccessTo + "') AS InvitationStatus FROM Event where IdEvent IN (SELECT IdEvent FROM Invitation WHERE AccessTo = '" + strAccessTo + "');", cn);
+                        SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT Event.*, (SELECT CASE WHEN Inv.AcceptedAt IS NULL THEN 'pendente' ELSE 'aceito' END FROM Invitation Inv where Inv.IdEvent = Event.IdEvent AND Inv.AccessTo = '" + strAccessTo + "') AS InvitationStatus FROM Event where IdEvent IN (SELECT IdEvent FROM Invitation WHERE AccessTo = '" + strAccessTo + "') ORDER BY Event.StartDateTime;", cn);
                         sqlDa.Fill(dt);
                         cn.Close();
                         return dt;
@@ -114,7 +109,7 @@ namespace TokenLab.Control
                     DataTable dt = new DataTable();
                     {
                         cn.Open();
-                        SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT Event.*, Invitation.AccessTo, (SELECT CASE WHEN Inv.AcceptedAt IS NULL THEN 'pendente' ELSE 'aceito' END FROM Invitation Inv where Inv.IdEvent = Event.IdEvent AND Inv.AccessTo = Invitation.AccessTo) AS InvitationStatus FROM Event INNER JOIN Invitation ON Event.IdEvent = Invitation.IdEvent WHERE Event.OwnerLogin = '" + strOwnerLogin + "';", cn);
+                        SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT Event.*, Invitation.AccessTo, (SELECT CASE WHEN Inv.AcceptedAt IS NULL THEN 'pendente' ELSE 'aceito' END FROM Invitation Inv where Inv.IdEvent = Event.IdEvent AND Inv.AccessTo = Invitation.AccessTo) AS InvitationStatus FROM Event INNER JOIN Invitation ON Event.IdEvent = Invitation.IdEvent WHERE Event.OwnerLogin = '" + strOwnerLogin + "' ORDER BY Invitation.InvitedAt;", cn);
                         sqlDa.Fill(dt);
                         cn.Close();
                         return dt;

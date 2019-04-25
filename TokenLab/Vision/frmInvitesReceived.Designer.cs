@@ -28,16 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvInvitesReceived = new System.Windows.Forms.DataGridView();
+            this.btnAccept = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.brnRemove = new System.Windows.Forms.Button();
             this.txbIdEvent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbStartDatetime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbFinalDatetime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbOwnerLogin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txbAccepted = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.brnRemove = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInvitesReceived)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,50 +60,6 @@
             this.dgvInvitesReceived.ReadOnly = true;
             this.dgvInvitesReceived.Size = new System.Drawing.Size(685, 144);
             this.dgvInvitesReceived.TabIndex = 1;
-            // 
-            // txbIdEvent
-            // 
-            this.txbIdEvent.DataPropertyName = "IdEvent";
-            this.txbIdEvent.HeaderText = "IdEvent";
-            this.txbIdEvent.Name = "txbIdEvent";
-            this.txbIdEvent.ReadOnly = true;
-            this.txbIdEvent.Visible = false;
-            // 
-            // txbStartDatetime
-            // 
-            this.txbStartDatetime.DataPropertyName = "StartDatetime";
-            this.txbStartDatetime.HeaderText = "Data Inicial";
-            this.txbStartDatetime.Name = "txbStartDatetime";
-            this.txbStartDatetime.ReadOnly = true;
-            // 
-            // txbFinalDatetime
-            // 
-            this.txbFinalDatetime.DataPropertyName = "FinalDatetime";
-            this.txbFinalDatetime.HeaderText = "Data Final";
-            this.txbFinalDatetime.Name = "txbFinalDatetime";
-            this.txbFinalDatetime.ReadOnly = true;
-            // 
-            // txbOwnerLogin
-            // 
-            this.txbOwnerLogin.DataPropertyName = "OwnerLogin";
-            this.txbOwnerLogin.HeaderText = "Convidado por";
-            this.txbOwnerLogin.Name = "txbOwnerLogin";
-            this.txbOwnerLogin.ReadOnly = true;
-            // 
-            // txbDescription
-            // 
-            this.txbDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.txbDescription.DataPropertyName = "Description";
-            this.txbDescription.HeaderText = "Descrição";
-            this.txbDescription.Name = "txbDescription";
-            this.txbDescription.ReadOnly = true;
-            // 
-            // txbAccepted
-            // 
-            this.txbAccepted.DataPropertyName = "InvitationStatus";
-            this.txbAccepted.HeaderText = "Status";
-            this.txbAccepted.Name = "txbAccepted";
-            this.txbAccepted.ReadOnly = true;
             // 
             // btnAccept
             // 
@@ -133,6 +91,56 @@
             this.brnRemove.UseVisualStyleBackColor = true;
             this.brnRemove.Click += new System.EventHandler(this.BrnRemove_Click);
             // 
+            // txbIdEvent
+            // 
+            this.txbIdEvent.DataPropertyName = "IdEvent";
+            this.txbIdEvent.HeaderText = "IdEvent";
+            this.txbIdEvent.Name = "txbIdEvent";
+            this.txbIdEvent.ReadOnly = true;
+            this.txbIdEvent.Visible = false;
+            // 
+            // txbStartDatetime
+            // 
+            this.txbStartDatetime.DataPropertyName = "StartDatetime";
+            dataGridViewCellStyle1.Format = "g";
+            dataGridViewCellStyle1.NullValue = null;
+            this.txbStartDatetime.DefaultCellStyle = dataGridViewCellStyle1;
+            this.txbStartDatetime.HeaderText = "Data Inicial";
+            this.txbStartDatetime.Name = "txbStartDatetime";
+            this.txbStartDatetime.ReadOnly = true;
+            // 
+            // txbFinalDatetime
+            // 
+            this.txbFinalDatetime.DataPropertyName = "FinalDatetime";
+            dataGridViewCellStyle2.Format = "g";
+            dataGridViewCellStyle2.NullValue = null;
+            this.txbFinalDatetime.DefaultCellStyle = dataGridViewCellStyle2;
+            this.txbFinalDatetime.HeaderText = "Data Final";
+            this.txbFinalDatetime.Name = "txbFinalDatetime";
+            this.txbFinalDatetime.ReadOnly = true;
+            // 
+            // txbOwnerLogin
+            // 
+            this.txbOwnerLogin.DataPropertyName = "OwnerLogin";
+            this.txbOwnerLogin.HeaderText = "Convidado por";
+            this.txbOwnerLogin.Name = "txbOwnerLogin";
+            this.txbOwnerLogin.ReadOnly = true;
+            // 
+            // txbDescription
+            // 
+            this.txbDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.txbDescription.DataPropertyName = "Description";
+            this.txbDescription.HeaderText = "Descrição";
+            this.txbDescription.Name = "txbDescription";
+            this.txbDescription.ReadOnly = true;
+            // 
+            // txbAccepted
+            // 
+            this.txbAccepted.DataPropertyName = "InvitationStatus";
+            this.txbAccepted.HeaderText = "Status";
+            this.txbAccepted.Name = "txbAccepted";
+            this.txbAccepted.ReadOnly = true;
+            // 
             // frmInvitesReceived
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -157,12 +165,12 @@
         private System.Windows.Forms.DataGridView dgvInvitesReceived;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button brnRemove;
         private System.Windows.Forms.DataGridViewTextBoxColumn txbIdEvent;
         private System.Windows.Forms.DataGridViewTextBoxColumn txbStartDatetime;
         private System.Windows.Forms.DataGridViewTextBoxColumn txbFinalDatetime;
         private System.Windows.Forms.DataGridViewTextBoxColumn txbOwnerLogin;
         private System.Windows.Forms.DataGridViewTextBoxColumn txbDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn txbAccepted;
-        private System.Windows.Forms.Button brnRemove;
     }
 }

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.brnRemove = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.dgvInvitesSent = new System.Windows.Forms.DataGridView();
@@ -105,6 +107,9 @@
             // txbStartDatetime
             // 
             this.txbStartDatetime.DataPropertyName = "StartDatetime";
+            dataGridViewCellStyle1.Format = "g";
+            dataGridViewCellStyle1.NullValue = null;
+            this.txbStartDatetime.DefaultCellStyle = dataGridViewCellStyle1;
             this.txbStartDatetime.HeaderText = "Data Inicial";
             this.txbStartDatetime.Name = "txbStartDatetime";
             this.txbStartDatetime.ReadOnly = true;
@@ -112,6 +117,9 @@
             // txbFinalDatetime
             // 
             this.txbFinalDatetime.DataPropertyName = "FinalDatetime";
+            dataGridViewCellStyle2.Format = "g";
+            dataGridViewCellStyle2.NullValue = null;
+            this.txbFinalDatetime.DefaultCellStyle = dataGridViewCellStyle2;
             this.txbFinalDatetime.HeaderText = "Data Final";
             this.txbFinalDatetime.Name = "txbFinalDatetime";
             this.txbFinalDatetime.ReadOnly = true;
